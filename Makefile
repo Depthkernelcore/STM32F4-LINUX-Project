@@ -1,17 +1,16 @@
 # 添加包含路径
 vpath %.S stlib
-vpath %.c stlib stlib/src 
-vpath %.h stlib stlib/cminc stlib/inc
-
+vpath %.c stlib stlib/src BSP
+vpath %.h stlib stlib/cminc stlib/inc BSP
 DEFS += -DUSE_STDPERIPH_DRIVER
 
-INCS += -Istlib -Istlib/cminc -Istlib/inc
-
+INCS += -Istlib -Istlib/cminc -Istlib/inc -IBSP
 # 使用其他外设在这里添加
 OBJS += main.o
+OBJS += BSP/led.o
 OBJS += stlib/startup_stm32f40xx.o 
 OBJS += stlib/system_stm32f4xx.o
-OBJS += stlib/src/stm32f4xx_rcc.o stlib/src/stm32f4xx_gpio.o 
+OBJS += stlib/src/stm32f4xx_rcc.o stlib/src/stm32f4xx_gpio.o stlib/src/stm32f4xx_usart.o 
 
 # 使用了编译优化和硬件浮点数
 CFLAGS += -mcpu=cortex-m4 -mthumb -Wall 
